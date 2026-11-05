@@ -2,7 +2,7 @@
 // CONFIGURATION
 // ==========================================
 
-const API = "http://127.0.0.1:8000";
+const API = "https://hire-cheq-backend.onrender.com/";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
