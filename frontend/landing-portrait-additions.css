@@ -1,0 +1,149 @@
+/* Hire-cheQ: personal portrait and About section additions */
+
+/* Put this stylesheet after landing.css in index.html. */
+
+.hero-role {
+    margin: -12px 0 18px;
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.45;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    background: linear-gradient(100deg, #c4a5ff, #8fb8ff, #dda4eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-visual {
+    isolation: isolate;
+}
+
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    width: 72%;
+    aspect-ratio: 1;
+    top: 12%;
+    left: 14%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(126, 103, 255, .34), rgba(61, 105, 231, .13) 48%, transparent 72%);
+    filter: blur(16px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-visual .visual-orbit {
+    z-index: 1;
+    pointer-events: none;
+}
+
+.portrait-stage {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 88%;
+    height: 94%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.portrait-halo {
+    position: absolute;
+    z-index: 0;
+    width: 67%;
+    aspect-ratio: 1;
+    top: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(188, 156, 255, .48), rgba(89, 103, 231, .26) 48%, rgba(72, 94, 200, .04) 72%, transparent 74%);
+    box-shadow: 0 0 65px rgba(130, 104, 255, .24), 0 0 125px rgba(73, 112, 232, .12);
+}
+
+.hero-portrait {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 12px 26px rgba(0, 0, 0, .28)) drop-shadow(0 0 18px rgba(145, 119, 255, .17));
+    transform-origin: center bottom;
+    animation: nadeemPortraitFloat 6s ease-in-out infinite;
+}
+
+@keyframes nadeemPortraitFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+.hero-visual .particle {
+    z-index: 3;
+}
+
+.hero-visual .floating-card {
+    z-index: 4;
+}
+
+/* A little more room for the personal introduction. */
+.about-description p {
+    max-width: 590px;
+}
+
+.about-strip .strip-item {
+    gap: 12px;
+}
+
+.about-strip .strip-number {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: #856bc5;
+    white-space: nowrap;
+}
+
+.about-strip .strip-text {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+    .hero-role {
+        margin-top: -8px;
+        margin-bottom: 16px;
+        font-size: 17px;
+    }
+
+    .portrait-stage {
+        width: 96%;
+        height: 96%;
+    }
+
+    .portrait-halo {
+        width: 72%;
+        top: 12%;
+    }
+}
+
+@media (max-width: 430px) {
+    .hero-role {
+        font-size: 15px;
+        letter-spacing: -.3px;
+    }
+
+    .portrait-stage {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-portrait {
+        animation: none;
+    }
+}

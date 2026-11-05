@@ -1,0 +1,842 @@
+/* ==========================================
+   HIRE-CHEQ ASSISTANT VISUAL EXPERIENCE
+   Presentation layer only
+========================================== */
+
+
+/* ==========================================
+   MAIN AMBIENT BACKGROUND
+========================================== */
+
+.main {
+    position: relative;
+    isolation: isolate;
+    background:
+        radial-gradient(
+            ellipse at 50% 5%,
+            rgba(91, 75, 165, 0.16),
+            transparent 48%
+        ),
+        radial-gradient(
+            ellipse at 90% 85%,
+            rgba(61, 101, 190, 0.12),
+            transparent 45%
+        ),
+        #101117;
+}
+
+
+/* Ambient pointer lighting */
+
+.main::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+    pointer-events: none;
+
+    background: radial-gradient(
+        circle 370px at var(--spot-x, 50%) var(--spot-y, 35%),
+        rgba(139, 117, 232, 0.09),
+        transparent 75%
+    );
+
+    transition: opacity .3s;
+}
+
+
+/* Background decorative glows */
+
+.ambient-glow {
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation: ambientFloat 12s ease-in-out infinite alternate;
+}
+
+.ambient-one {
+    top: 5%;
+    right: 8%;
+
+    background: rgba(119, 92, 203, 0.12);
+}
+
+.ambient-two {
+    bottom: 10%;
+    left: 12%;
+
+    background: rgba(65, 112, 205, 0.10);
+
+    animation-delay: -5s;
+}
+
+@keyframes ambientFloat {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(25px, -25px, 0) scale(1.2);
+    }
+}
+
+
+/* Keep existing application content above decorations */
+
+.scroller,
+.bar {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ==========================================
+   SIDEBAR ENHANCEMENTS
+========================================== */
+
+.sidebar {
+    position: relative;
+
+    background:
+        radial-gradient(
+            ellipse at 0% 0%,
+            rgba(124, 100, 203, 0.13),
+            transparent 50%
+        ),
+        #17181f;
+
+    border-right: 1px solid rgba(167, 139, 250, 0.12);
+}
+
+
+/* Animated brand symbol */
+
+.logo .gem {
+    font-size: 25px;
+
+    filter: drop-shadow(
+        0 0 12px rgba(167, 139, 250, 0.55)
+    );
+
+    animation: brandGlow 4s ease-in-out infinite;
+}
+
+@keyframes brandGlow {
+    0%, 100% {
+        filter: drop-shadow(
+            0 0 8px rgba(167, 139, 250, .3)
+        );
+    }
+
+    50% {
+        filter: drop-shadow(
+            0 0 19px rgba(167, 139, 250, .8)
+        );
+    }
+}
+
+
+/* Sidebar navigation */
+
+.navitem {
+    position: relative;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.navitem:hover {
+    transform: translateX(3px);
+}
+
+.navitem.on {
+    background: linear-gradient(
+        100deg,
+        rgba(115, 94, 193, .23),
+        rgba(66, 133, 244, .09)
+    );
+
+    color: #d0c5ff;
+
+    box-shadow:
+        inset 2px 0 0 #a78bfa;
+}
+
+
+/* New chat button */
+
+.newchat {
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.newchat:hover {
+    background: rgba(255,255,255,.09);
+
+    transform: translateX(3px);
+}
+
+
+/* Sidebar footer */
+
+.sidebar-footer {
+    border-top: 1px solid rgba(255,255,255,.07);
+
+    padding-top: 16px;
+
+    margin-top: auto;
+}
+
+.status-dot {
+    box-shadow: 0 0 12px rgba(74, 222, 128, .7);
+}
+
+
+/* Back to home */
+
+.back-home {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 5px 6px 6px;
+
+    padding: 11px 13px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: rgba(255,255,255,.025);
+
+    color: #aaa7bd;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    transition:
+        color .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+}
+
+.back-home span {
+    font-size: 17px;
+}
+
+.back-home:hover {
+    color: #e5dcff;
+
+    background: rgba(167,139,250,.12);
+
+    border-color: rgba(167,139,250,.25);
+
+    transform: translateX(3px);
+}
+
+
+/* ==========================================
+   WELCOME SCREEN
+========================================== */
+
+.welcome {
+    position: relative;
+
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+.welcome-icon {
+    position: relative;
+
+    width: 88px;
+    height: 88px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    font-size: 38px;
+
+    color: #fff;
+
+    -webkit-text-fill-color: white;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #d9c7ff,
+            #a795f1 28%,
+            #625ec5 60%,
+            #29295e 100%
+        );
+
+    border: 1px solid rgba(255,255,255,.24);
+
+    box-shadow:
+        0 0 30px rgba(142, 116, 250, .32),
+        0 0 75px rgba(116, 110, 243, .17),
+        inset 0 0 22px rgba(255,255,255,.18);
+
+    animation: welcomeOrbFloat 5s ease-in-out infinite;
+
+    isolation: isolate;
+}
+
+.welcome-icon::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -11px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(182, 164, 255, .25);
+
+    animation: welcomeRing 8s linear infinite;
+
+    z-index: -1;
+}
+
+.welcome-icon::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -25px;
+
+    border-radius: 50%;
+
+    background: rgba(146, 123, 255, .07);
+
+    filter: blur(18px);
+
+    z-index: -2;
+}
+
+@keyframes welcomeOrbFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(12deg);
+    }
+}
+
+@keyframes welcomeRing {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    to {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+
+/* Welcome brand label */
+
+.welcome-brand {
+    font-size: 9px;
+
+    color: #a99ae1;
+
+    letter-spacing: 2.3px;
+
+    font-weight: 700;
+
+    margin-top: 4px;
+}
+
+
+/* Welcome heading */
+
+.welcome h1 {
+    background: linear-gradient(
+        100deg,
+        #ded7ff,
+        #a99af0,
+        #e0a4d7
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    letter-spacing: -1.5px;
+
+    text-wrap: balance;
+
+    animation: welcomeHeadingIn .85s ease both;
+}
+
+@keyframes welcomeHeadingIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Welcome subtitle */
+
+.welcome-subtitle {
+    color: #a5a2b5;
+
+    max-width: 520px;
+
+    line-height: 1.9;
+}
+
+
+/* Suggestion chips */
+
+.chip {
+    position: relative;
+
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.025)
+    );
+
+    border: 1px solid rgba(179, 162, 242, .13);
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.chip span {
+    margin-right: 7px;
+
+    color: #b9a4ff;
+
+    font-size: 14px;
+}
+
+.chip:hover {
+    transform: translateY(-5px);
+
+    background: rgba(139, 114, 225, .15);
+
+    border-color: rgba(179, 162, 242, .38);
+
+    box-shadow: 0 12px 30px rgba(80, 57, 150, .18);
+}
+
+
+/* Bottom welcome note */
+
+.welcome-bottom-note {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #72718a;
+
+    font-size: 9px;
+
+    letter-spacing: 2.5px;
+
+    margin-top: 5px;
+}
+
+.welcome-bottom-note::before,
+.welcome-bottom-note::after {
+    content: "";
+
+    width: 22px;
+    height: 1px;
+
+    background: #8271b7;
+
+    opacity: .55;
+}
+
+
+/* ==========================================
+   MESSAGE ENTRANCE ANIMATIONS
+========================================== */
+
+.msg.fx-enter {
+    animation: messageEnter .45s cubic-bezier(.2,.7,.2,1) both;
+}
+
+@keyframes messageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   USER MESSAGE
+========================================== */
+
+.msg.user .bubble {
+    background: linear-gradient(
+        145deg,
+        rgba(89, 81, 139, .43),
+        rgba(54, 55, 81, .68)
+    );
+
+    border: 1px solid rgba(174, 159, 240, .14);
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.12);
+
+    transition:
+        background .25s ease,
+        border-color .25s ease;
+}
+
+
+/* ==========================================
+   AI MESSAGE AVATAR
+========================================== */
+
+.avatar {
+    background: radial-gradient(
+        circle at 30% 25%,
+        #c9b8ff,
+        #8d81e0 45%,
+        #494a91
+    );
+
+    color: white;
+
+    font-size: 15px;
+
+    box-shadow:
+        0 0 15px rgba(145, 124, 232, .35),
+        inset 0 0 9px rgba(255,255,255,.27);
+
+    animation: avatarPulse 4s ease-in-out infinite;
+}
+
+@keyframes avatarPulse {
+    50% {
+        box-shadow:
+            0 0 23px rgba(145, 124, 232, .6),
+            inset 0 0 9px rgba(255,255,255,.27);
+    }
+}
+
+
+/* AI response headings */
+
+.aibody h1,
+.aibody h2,
+.aibody h3 {
+    color: #e1d8ff;
+}
+
+
+/* AI response links */
+
+.aibody a {
+    color: #bba9ff;
+
+    text-decoration: underline;
+
+    text-underline-offset: 3px;
+}
+
+
+/* Existing table design enhancement */
+
+.aibody .table-wrap {
+    border-color: rgba(167,139,250,.19);
+
+    box-shadow: 0 8px 28px rgba(0,0,0,.13);
+}
+
+.aibody th {
+    background: rgba(132,110,215,.17);
+}
+
+
+/* ==========================================
+   THINKING ANIMATION
+========================================== */
+
+.dots span {
+    background: #b4a1f7;
+
+    box-shadow: 0 0 10px rgba(174,148,255,.5);
+}
+
+
+/* ==========================================
+   INPUT COMPOSER
+========================================== */
+
+.ibox {
+    background: rgba(40, 41, 52, .91);
+
+    border: 1px solid rgba(167,139,250,.14);
+
+    box-shadow:
+        0 14px 45px rgba(0,0,0,.19),
+        inset 0 1px rgba(255,255,255,.035);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+.ibox:focus-within {
+    border-color: rgba(167,139,250,.48);
+
+    box-shadow:
+        0 0 0 3px rgba(167,139,250,.055),
+        0 12px 40px rgba(90,65,170,.13);
+}
+
+
+/* JD Match pill */
+
+.jdpill {
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease,
+        transform .25s ease;
+}
+
+.jdpill:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.jdpill.on {
+    background: linear-gradient(
+        110deg,
+        #7668cb,
+        #9279de
+    );
+
+    border-color: transparent;
+
+    box-shadow: 0 4px 18px rgba(125,101,212,.3);
+}
+
+
+/* Send button */
+
+.sendbtn {
+    color: #c3b5ff;
+
+    border-radius: 12px;
+
+    transition:
+        background .25s ease,
+        transform .25s ease,
+        color .25s ease;
+}
+
+.sendbtn:hover:not(:disabled) {
+    background: rgba(167,139,250,.18);
+
+    color: white;
+
+    transform: translateY(-3px);
+}
+
+
+/* ==========================================
+   JD MATCH PANEL
+========================================== */
+
+.jdarea {
+    animation: jdPanelAppear .32s ease both;
+}
+
+@keyframes jdPanelAppear {
+    from {
+        opacity: 0;
+        transform: translateY(9px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Upload button */
+
+.uploadbtn {
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+}
+
+.uploadbtn:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(167,139,250,.65);
+}
+
+
+/* Analyze button */
+
+.analyzebtn {
+    background: linear-gradient(
+        115deg,
+        #7668cb,
+        #9978e0,
+        #bb88d6
+    );
+
+    box-shadow: 0 6px 22px rgba(128,100,204,.18);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        opacity .25s ease;
+}
+
+.analyzebtn:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 30px rgba(128,100,204,.32);
+}
+
+
+/* JD textarea */
+
+#jdinp:focus {
+    box-shadow: 0 0 0 3px rgba(167,139,250,.055);
+}
+
+
+/* ==========================================
+   BUTTON FOCUS
+========================================== */
+
+button:focus-visible,
+a:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.scroller::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        rgba(167,139,250,.5),
+        rgba(83,116,202,.4)
+    );
+
+    border-radius: 8px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .welcome-icon {
+        width: 74px;
+        height: 74px;
+        font-size: 32px;
+    }
+
+    .welcome-brand {
+        font-size: 8px;
+        letter-spacing: 1.6px;
+    }
+
+    .welcome h1 {
+        letter-spacing: -.8px;
+    }
+
+    .welcome-bottom-note {
+        font-size: 8px;
+    }
+
+    .back-home {
+        padding: 10px;
+        font-size: 11px;
+    }
+
+}
+
+
+/* ==========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+
+    .msg.fx-enter {
+        animation: none;
+    }
+
+}

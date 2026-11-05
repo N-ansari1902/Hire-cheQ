@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hire-cheQ : Nadeem's Portfolio AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- NEW VISUAL EFFECTS -->
+    <link rel="stylesheet" href="assistant-effects.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+            <!-- BRANDING -->
+
+            <div class="logo">
+
+                <span class="gem">✦</span>
+
+                <div class="brand-name">
+                    <strong>Hire-cheQ</strong>
+                    <small>: Nadeem's Portfolio AI</small>
+                </div>
+
+            </div>
+
+
+            <!-- NEW CHAT -->
+
+            <button
+                class="newchat"
+                onclick="newChat()"
+                type="button"
+            >
+
+                <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                >
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+
+                New chat
+
+            </button>
+
+
+            <!-- NAVIGATION -->
+
+            <nav>
+
+                <div
+                    class="navitem on"
+                    id="ni-chat"
+                    onclick="switchMode('chat')"
+                >
+
+                    <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+
+                    Chat
+
+                </div>
+
+
+                <div
+                    class="navitem"
+                    id="ni-jd"
+                    onclick="switchMode('jd')"
+                >
+
+                    <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+
+                    JD Match
+
+                </div>
+
+            </nav>
+
+
+            <!-- SIDEBAR FOOTER -->
+
+            <div class="sidebar-footer">
+
+                <span class="status-dot"></span>
+
+                Hire-cheQ AI Assistant
+
+            </div>
+
+
+            <!-- BACK TO LANDING PAGE -->
+
+            <a href="index.html" class="back-home">
+
+                <span>←</span>
+
+                Back to Home
+
+            </a>
+
+        </aside>
+
+
+        <!-- =====================================
+             MAIN CONTENT
+        ====================================== -->
+
+        <main class="main">
+
+            <!-- DECORATIVE BACKGROUND ELEMENTS -->
+
+            <div class="ambient-glow ambient-one"></div>
+
+            <div class="ambient-glow ambient-two"></div>
+
+
+            <!-- CHAT SCROLLER -->
+
+            <div class="scroller" id="scroller">
+
+
+                <!-- =================================
+                     WELCOME SCREEN
+                ================================== -->
+
+                <div class="welcome" id="welcome">
+
+
+                    <div class="welcome-icon">
+                        ✦
+                    </div>
+
+
+                    <div class="welcome-brand">
+                        HIRE-CHEQ · NADEEM'S PORTFOLIO AI
+                    </div>
+
+
+                    <h1>
+                        Where should we start?
+                    </h1>
+
+
+                    <p class="welcome-subtitle">
+
+                        Welcome to Hire-cheQ.
+
+                        Ask me anything about Nadeem's background,
+                        skills, projects and experience.
+
+                    </p>
+
+
+                    <!-- SUGGESTION CHIPS -->
+
+                    <div class="chips">
+
+
+                        <button
+                            class="chip"
+                            onclick="quickMsg(this)"
+                            type="button"
+                        >
+
+                            <span>✧</span>
+
+                            What are Nadeem's technical skills?
+
+                        </button>
+
+
+                        <button
+                            class="chip"
+                            onclick="quickMsg(this)"
+                            type="button"
+                        >
+
+                            <span>⌘</span>
+
+                            Tell me about Nadeem's projects.
+
+                        </button>
+
+
+                        <button
+                            class="chip"
+                            onclick="quickMsg(this)"
+                            type="button"
+                        >
+
+                            <span>▤</span>
+
+                            What is Nadeem's work experience?
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="welcome-bottom-note">
+
+                        YOUR CONVERSATION STARTS HERE
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     CHAT MESSAGES
+                ================================== -->
+
+                <div class="msgs" id="msgs"></div>
+
+            </div>
+
+
+            <!-- =====================================
+                 BOTTOM INPUT AREA
+            ====================================== -->
+
+            <div class="bar">
+
+                <div class="ibox" id="ibox">
+
+
+                    <!-- NORMAL CHAT INPUT -->
+
+                    <div class="irow">
+
+
+                        <!-- JD MATCH TOGGLE -->
+
+                        <button
+                            class="jdpill"
+                            id="jdpill"
+                            onclick="toggleJD()"
+                            type="button"
+                            title="Open JD Match"
+                        >
+
+                            <svg
+                                width="13"
+                                height="13"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.35-4.35"/>
+                            </svg>
+
+                            JD Match
+
+                        </button>
+
+
+                        <!-- CHAT TEXTAREA -->
+
+                        <textarea
+                            id="inp"
+                            placeholder="Ask about Nadeem..."
+                            rows="1"
+                            onkeydown="onKey(event)"
+                            oninput="grow(this)"
+                        ></textarea>
+
+
+                        <!-- SEND BUTTON -->
+
+                        <button
+                            class="sendbtn"
+                            id="sendbtn"
+                            onclick="sendChat()"
+                            type="button"
+                            title="Send message"
+                        >
+
+                            <svg
+                                width="17"
+                                height="17"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- =================================
+                         JD MATCH PANEL
+                    ================================== -->
+
+                    <div
+                        class="jdarea"
+                        id="jdarea"
+                        style="display: none"
+                    >
+
+
+                        <!-- FILE UPLOAD -->
+
+                        <div class="jd-upload-row">
+
+                            <div class="upload-left">
+
+                                <label
+                                    for="jdfile"
+                                    class="uploadbtn"
+                                    title="Upload a PDF or DOCX job description"
+                                >
+
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+
+                                    Upload JD
+
+                                </label>
+
+
+                                <input
+                                    type="file"
+                                    id="jdfile"
+                                    accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                    hidden
+                                >
+
+
+                                <span
+                                    id="jdFileName"
+                                    class="jd-file-name"
+                                >
+                                    PDF or DOCX · Max 10 MB
+                                </span>
+
+                            </div>
+
+
+                            <!-- REMOVE FILE -->
+
+                            <button
+                                type="button"
+                                id="removeJDFile"
+                                class="remove-file-btn"
+                                onclick="removeJDFile()"
+                                hidden
+                            >
+                                Remove
+                            </button>
+
+                        </div>
+
+
+                        <!-- JOB DESCRIPTION TEXTAREA -->
+
+                        <textarea
+                            id="jdinp"
+                            placeholder="Or paste the complete Job Description here..."
+                            rows="5"
+                            spellcheck="false"
+                            oninput="growJD(this)"
+                            onkeydown="onJDKey(event)"
+                        ></textarea>
+
+
+                        <!-- JD FOOTER -->
+
+                        <div class="jdfooter">
+
+                            <span class="jd-hint">
+
+                                Paste text or upload a PDF/DOCX file.
+
+                                <br>
+
+                                Ctrl + Enter to analyze.
+
+                            </span>
+
+
+                            <button
+                                class="analyzebtn"
+                                id="analyzebtn"
+                                onclick="analyzeJD()"
+                                type="button"
+                            >
+
+                                Analyze Match
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================
+         EXISTING CORE LOGIC
+    ====================================== -->
+
+    <script src="app.js"></script>
+
+
+    <!-- =====================================
+         NEW VISUAL EFFECTS ONLY
+    ====================================== -->
+
+    <script src="assistant-effects.js"></script>
+
+</body>
+
+</html>
